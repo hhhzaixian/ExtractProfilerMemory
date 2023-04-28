@@ -19,26 +19,26 @@ public class MemoryElement : IComparable<MemoryElement>
     {
     }
 
-    public static MemoryElement Create(Dynamic srcMemoryElement, int depth, int filterDepth, float filterSize)
+    public static MemoryElement Create(Dynamic srcElement, int depth, int filterDepth, float filterSize)
     {
-        if (srcMemoryElement == null) return null;
-        var dstMemoryElement = new MemoryElement { _depth = depth };
-        Dynamic.CopyFrom(dstMemoryElement, srcMemoryElement.InnerObject,
+        if (srcElement == null) return null;
+        var dstElement = new MemoryElement { _depth = depth };
+        Dynamic.CopyFrom(dstElement, srcElement.InnerObject,
             BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetField);
 
-        var srcChildren = srcMemoryElement.PublicInstanceField<IList>("children");
-        if (srcChildren == null) return dstMemoryElement;
+        var srcChildren = srcElement.PublicInstanceField<IList>("children");
+        if (srcChildren == null) return dstElement;
         foreach (var srcChild in srcChildren)
         {
             var memoryElement = Create(new Dynamic(srcChild), depth + 1, filterDepth, filterSize);
             if (memoryElement == null) continue;
             if (depth > filterDepth) continue;
             if (!(memoryElement.totalMemory >= filterSize)) continue;
-            dstMemoryElement.children.Add(memoryElement);
+            dstElement.children.Add(memoryElement);
         }
 
-        dstMemoryElement.children.Sort();
-        return dstMemoryElement;
+        dstElement.children.Sort();
+        return dstElement;
     }
 
 

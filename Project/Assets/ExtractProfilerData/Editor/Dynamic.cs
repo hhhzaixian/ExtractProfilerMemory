@@ -3,11 +3,11 @@ using System.Reflection;
 
 public class Dynamic
 {
-    private const BindingFlags PublicInstanceFieldFlag = BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetField;
+    private const BindingFlags PublicInstanceFieldFlag = BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetField | BindingFlags.GetProperty;
 
-    private const BindingFlags PrivateInstanceFieldFlag = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetField;
+    private const BindingFlags PrivateInstanceFieldFlag = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetField | BindingFlags.GetProperty;
 
-    private const BindingFlags PrivateStaticFieldFlag = BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.GetField;
+    private const BindingFlags PrivateStaticFieldFlag = BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.GetField | BindingFlags.GetProperty;
 
     private const BindingFlags PublicInstanceMethodFlag = BindingFlags.Instance | BindingFlags.Public;
 
